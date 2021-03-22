@@ -1,13 +1,11 @@
 import React, { createContext } from 'react';
 import useLocalStorageReducer from '../hooks/useLocalStorageReducer';
 import todosReducer from '../reducers/todos.reducer';
+import { get,post } from '../utility/fetch';
 
-const defaultTodos = [
-  { id: '0', task: 'Read a book', completed: false },
-  { id: '1', task: 'Jog in a playground', completed: true },
-  { id: '2', task: 'Write articles', completed: false }
-];
-
+const defaultTodos = get('api/alerts/43243243214321');
+ 
+   
 export const TodosContext = createContext();
 export const DispatchContext = createContext();
 
@@ -17,7 +15,8 @@ export function TodosProvider(props) {
     todosReducer,
     defaultTodos
   );
-
+  console.log(todos);
+  const add = (todos) => post('users',todos);
   return (
     <TodosContext.Provider value={todos}>
       <DispatchContext.Provider value={dispatch}>
